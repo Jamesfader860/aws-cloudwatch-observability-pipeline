@@ -4,8 +4,36 @@
 An end-to-end cloud monitoring solution that utilizes the Amazon CloudWatch Agent to securely ingest Apache web server logs from an EC2 instance, transforming raw text into real-time operational metrics and visual dashboards.
 
 ## 📐 Architecture Diagram
+```mermaid
+graph LR
+    subgraph Users
+        U[Public Internet Traffic]
+    end
 
-This pipeline bridges the gap between infrastructure deployment and active systems observability, establishing a secure data flow from raw text files to high-level visualizations.
+    subgraph AWS EC2 Host
+        A[Apache Web Server <br/> 'httpd'] -->|Generates local text logs| B[(/var/log/httpd/access_log)]
+        C[Amazon CloudWatch Agent] -->|Reads restricted file| B
+    end
+
+    subgraph Security & Access
+        I[IAM Role <br/> 'CloudWatchAgentAdminPolicy'] -->|Authorizes & signs payload| C
+    end
+
+    subgraph AWS CloudWatch Suite
+        C -->|Streams raw data| D[CloudWatch Log Groups]
+        D -->|Processes via Metric Filter| E[CloudWatch Metrics <br/> 'InboundTraffic']
+        E -->|Plots time-series graphs| F[CloudWatch Dashboard]
+    end
+
+    U -->|Hits Public IP| A
+
+    %% Styling Elements to look clean
+    style U fill:#f9f,stroke:#333,stroke-width:2px
+    style A fill:#ff9,stroke:#333,stroke-width:2px
+    style C fill:#9f9,stroke:#333,stroke-width:2px
+    style F fill:#9ff,stroke:#333,stroke-width:2px
+    style I fill:#f99,stroke:#333,stroke-width:2px
+
 ### 🔄 The Data Lifecycle
 1. **Traffic Generation:** Users hit the public EC2 IP address, prompting the Apache Web Server (`httpd`) to log local infrastructure access data to `/var/log/httpd/access_log`.
 2. **Secure Log Ingestion:** The Amazon CloudWatch Agent, executing under an isolated `cwagent` system account with explicit directory execute permissions, securely streams log payloads to the cloud.
