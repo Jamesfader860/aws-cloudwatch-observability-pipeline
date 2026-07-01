@@ -32,21 +32,21 @@ The project began by launching an isolated EC2 instance and building out the Apa
 
 | SSH Access Verified | Apache Web Server Live | Initial CloudWatch Blindness |
 |---|---|---|
-| ![SSH Success](screenshots/01-ssh-terminal-success.png) | ![Apache Live](screenshots/02-apache-landing-page.png) | ![Empty Logs](screenshots/03-cloudwatch-empty-logs.png) |
+| ![SSH Success](01-ssh-terminal-success.png) | ![Apache Live](02-apache-landing-page.png) | ![Empty Logs](03-cloudwatch-empty-logs.png) |
 
 ### 2. The Solution: Engineering the Telemetry Pipeline
 To solve the visibility gap, a least-privilege IAM profile was coupled to the instance to authorize monitoring delivery. The CloudWatch Agent was then successfully configured and deployed to watch the restricted access files.
 
 | Secure IAM Role Attached | Centralized Log Group Established |
 |---|---|
-| ![IAM Role Profile](screenshots/04-iam-role-attached.png) | ![Log Group Active](screenshots/05-cloudwatch-log-group.png) |
+| ![IAM Role Profile](04-iam-role-attached.png) | ![Log Group Active](05-cloudwatch-log-group.png) |
 
 ### 3. Operational Visibility: Live Monitoring & Analytics
 By implementing a custom metric filter to intercept raw log lines, traffic data was successfully extracted, aggregated, and mapped to an executive-facing dashboard showing real-time, active traffic patterns.
 
 | Operational Control Dashboard | Real-Time Time-Series Analytics |
 |---|---|
-| ![CloudWatch Dashboard](screenshots/06-cloudwatch-dashboard.png) | ![Metrics Spike Visualization](screenshots/07-cloudwatch-metrics.png) |
+| ![CloudWatch Dashboard](06-cloudwatch-dashboard.png) | ![Metrics Spike Visualization](07-cloudwatch-metrics.png) |
 
 ---
 
