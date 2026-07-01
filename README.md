@@ -33,6 +33,7 @@ graph LR
     style C fill:#9f9,stroke:#333,stroke-width:2px
     style F fill:#9ff,stroke:#333,stroke-width:2px
     style I fill:#f99,stroke:#333,stroke-width:2px
+``` 
 
 ### 🔄 The Data Lifecycle
 1. **Traffic Generation:** Users hit the public EC2 IP address, prompting the Apache Web Server (`httpd`) to log local infrastructure access data to `/var/log/httpd/access_log`.
